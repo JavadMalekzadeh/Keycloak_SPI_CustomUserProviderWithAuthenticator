@@ -49,16 +49,17 @@ To configure the Keycloak SPI User Fetcher, follow these steps:
 - Click on the `Add Provider` button and select the custom user provider name.
 - Save the configuration and enable the SPI.
 - Test the integration by fetching user data using the provided API. It is required to go to the Users section in the left panel. Then click on `view all users` to fetch all users from database. you can also search for a full name or partial name to achieve the specific user.
-![Capture2](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/27be5f99-84f7-4fc3-afaf-dafe6f2905c8)
+![Capture2](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/8b3887c5-21b5-4fe1-a113-1708bd27e094)
 
-Clicking on a user, a new form comes up to give further user details. in Groups, RoleMappings, Attributes, and Credentials, all details can be seen. also if you need this information to apply a policy against a resource in the Authorization section of a specific Client, it is accessible:
-![Capture42](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/935398fe-d6c4-432c-97db-b1f1bec2241f)
-![Capture92](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/2e37ba45-0c78-4c86-b45f-00506213ba95)
+Clicking on a user, a new form comes up to give further user details. in Groups, RoleMappings, Attributes, and Credentials, all details can be seen.
+![Capture42](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/76a73fc3-4be9-4653-9c7c-04be3d5f43a8)
 
+Also if you need this information to apply a policy against a resource in the Authorization section of a specific Client, it is accessible:
+![Capture92](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/c4486346-c010-41a4-a2d0-196c9fd9b33d)
 
 ## Authenticator
 To install the custom Authenticator it is time to go to the Authentication section. here you can see different Authentication flows. Click on New button then name it and save. Click on `Add execution` to create the following flow:
-![capturesss](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/458bf871-9087-4847-ae29-eab474ef75d5)
+![capturesss](https://github.com/JavadMalekzadeh/Keycloak_SPI_CustomUserProviderWithCustomAuthenticator/assets/61550893/7b2d26b8-0c21-4795-9bad-bfa9b54bfd32)
 
 After then, this Authentication flow can be set for any Client settings. go to the specific client. in `Settings` tab. under `Authentication flow overrides` set your new fresh Authenticator.
 Now you can get a token through password grant type with the Authenticator that accepts three parameters to login.  here we have username, password, and banch :
@@ -68,10 +69,10 @@ curl --location 'http://localhost:8080/auth/realms/Banco/protocol/openid-connect
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode 'username=username' \
 --data-urlencode 'password=pass' \
+--data-urlencode 'branch=branch_Code' \
 --data-urlencode 'grant_type=password' \
 --data-urlencode 'client_id=MyClient_Id' \
 --data-urlencode 'client_secret=MyClient_Secret' \
 --data-urlencode 'redirect_uri=http://localhost/callback' \
 --data-urlencode 'scope=openid profile' \
---data-urlencode 'branch=0100'
 ```
